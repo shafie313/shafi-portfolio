@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Wireless access point and local file-sharing lab briefing covering Wi-Fi setup, client connectivity, SMB permissions and troubleshooting.">
+  <meta name="theme-color" content="#0A1918">
+  <title>Wireless Access Point &amp; File Sharing | MUHAMMED SHAFI AM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../project-page.css">
+  <script src="../project-page.js" defer></script>
+</head>
+<body class="theme-wireless">
+  <div class="case-wrap">
+    <header class="case-header">
+      <a class="case-brand" href="../../../index.html#home">SHAFI AM<b>.</b> <span>/ PROJECTS</span></a>
+      <nav class="case-nav" aria-label="Project navigation">
+        <a class="case-back" href="../../../index.html#projects">← BACK TO PROJECTS</a>
+        <a class="case-home" href="../../../index.html#home">PORTFOLIO HOME</a>
+      </nav>
+    </header>
+    <main>
+      <section class="case-hero">
+        <div class="case-label">03 / WI-FI / TCP/IP / SMB</div>
+        <h1>Wireless Access Point &amp; File Sharing</h1>
+        <p class="case-lead">A practical home/office lab guide to configuring an access point, checking wireless client connectivity and testing local Windows file sharing with appropriate network and account permissions.</p>
+        <p class="case-notice">The source is a setup and troubleshooting checklist, not a completed configuration report. Router features vary by model and firmware; no working test result is claimed.</p>
+        <div class="case-tags"><span>Wi-Fi</span><span>TCP/IP</span><span>Windows networking</span><span>SMB</span><span>Access point</span></div>
+        <div class="case-actions">
+          <a class="case-button case-button-primary" href="#implementation">VIEW SETUP STEPS ↓</a>
+          <a class="case-button" href="#troubleshooting">TROUBLESHOOTING</a>
+        </div>
+      </section>
+
+      <section class="case-grid" aria-label="Project briefing">
+        <article class="case-card">
+          <div class="case-index">01 / OBJECTIVE</div>
+          <h2>Connect wireless clients and share files locally</h2>
+          <p>Configure a wireless access point or router, validate the client network settings, and test a local SMB share from a second client.</p>
+          <div class="case-subsection">
+            <h3>Environment and preparation</h3>
+            <ul>
+              <li>Record the router/AP model, firmware, LAN subnet, DHCP range and current configuration.</li>
+              <li>Back up the configuration if the device supports it.</li>
+              <li>For a dedicated access point, use the intended operating mode and avoid creating a second DHCP server or accidental double NAT.</li>
+              <li>Router USB storage is optional and depends on exact model and firmware support.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">02 / ACCESS POINT CONFIGURATION</div>
+          <h2>Set up wireless access</h2>
+          <ol>
+            <li>Connect the access point in the intended mode. For a dedicated AP, the guide recommends LAN-to-LAN and disabling its DHCP service when the main router already provides DHCP.</li>
+            <li>Set a unique SSID and WPA2-AES or WPA3 security with a strong, unique passphrase.</li>
+            <li>Disable WPS if it is not needed and update firmware from the vendor.</li>
+            <li>Connect a client and check the assigned IP address, subnet mask, default gateway and DNS.</li>
+            <li>Check coverage in multiple rooms; note signal level, band, channel congestion and dead zones.</li>
+          </ol>
+        </article>
+
+        <article class="case-card case-card-wide" id="implementation">
+          <div class="case-index">03 / LOCAL FILE SHARING</div>
+          <h2>Configure and test an SMB share</h2>
+          <ol>
+            <li>Use a trusted computer as the file server. Enable SMB sharing only on a Private/trusted network.</li>
+            <li>Grant share access to specific users; avoid broad Everyone/full-control permissions.</li>
+            <li>On a second Windows client, open File Explorer, select the address bar, and enter the share's network location using the file server's host name or local IPv4 address.</li>
+            <li>Verify read and write behavior according to the permissions intended for the lab.</li>
+          </ol>
+          <div class="case-subsection">
+            <h3>Windows GUI workflow</h3>
+            <ol>
+              <li>On the file-server PC, open <strong>Settings → Network &amp; internet</strong> and confirm the connection is set to <strong>Private</strong> only if this is a trusted network.</li>
+              <li>Open <strong>Settings → Network &amp; internet → Advanced network settings → Advanced sharing settings</strong>. Turn on file and printer sharing for the Private network profile.</li>
+              <li>In File Explorer, right-click the intended folder, choose <strong>Show more options → Give access to → Specific people</strong> (labels can vary by Windows version), and select the intended lab account and permission level.</li>
+              <li>On the second PC, open File Explorer and enter the share location using the server's host name or local IPv4 address. Sign in with an account that has permission if prompted.</li>
+              <li>Open a test file to check read access. To verify write access, create a harmless test file only if the account is intended to have write permission; remove the test file afterwards.</li>
+            </ol>
+          </div>
+          <p class="case-callout"><strong>Router USB storage:</strong> Consult the exact model's manual. A USB port alone does not guarantee SMB or other file-sharing support. Do not expose FTP, SMB or router administration directly to the public internet.</p>
+        </article>
+
+        <article class="case-card case-card-wide" id="configuration">
+          <div class="case-index">04 / COMMANDS &amp; CONFIGURATION</div>
+          <h2>Validate addressing, name resolution and the share</h2>
+          <p>The guide calls for checking the Windows client configuration, gateway and DNS lookup, then accessing the share from a second client. These are verification examples to run in your own authorized lab; no output is supplied or claimed.</p>
+          <div class="case-code">
+            <pre><code>ipconfig /all
+ping &lt;default-gateway-address&gt;
+nslookup &lt;approved-hostname&gt;
+
+# Open in File Explorer from a second client:
+\\HOSTNAME\ShareName
+# Or use the file server's local IPv4 address:
+\\&lt;server-ipv4-address&gt;\ShareName</code></pre>
+          </div>
+          <p class="case-callout"><strong>Configuration notes:</strong> For a dedicated AP, the guide suggests LAN-to-LAN and disabling its DHCP server when the main router already provides DHCP. Keep SMB on a trusted Private network and grant access to specific users.</p>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">05 / CONNECTIVITY CHECKS</div>
+          <h2>Verify network settings in Windows</h2>
+          <p>On the wireless client, open <strong>Settings → Network &amp; internet → Wi-Fi → the connected network's properties</strong>. Review the assigned IP address, subnet mask, default gateway and DNS values.</p>
+          <p class="case-subsection">Use the Windows network status page to confirm connectivity. If a web browser is part of the lab, try a known permitted site only after gateway and DNS settings appear correct. No test output is included in the source guide.</p>
+        </article>
+
+        <article class="case-card" id="troubleshooting">
+          <div class="case-index">06 / TROUBLESHOOTING</div>
+          <h2>Follow the documented checks</h2>
+          <ul>
+            <li><strong>No IP address:</strong> check Wi-Fi association and the router's DHCP settings; make sure another device is not also handing out addresses.</li>
+            <li><strong>Network connectivity works but names do not:</strong> review the DNS values in Windows network properties.</li>
+            <li><strong>Internet works but the share does not:</strong> check subnet reachability, Windows Private network profile, appropriate firewall rules, credentials and permissions.</li>
+            <li><strong>Router USB storage is not visible:</strong> check drive format, model/firmware feature support and whether the sharing service and protocol are enabled.</li>
+          </ul>
+        </article>
+
+        <article class="case-card case-card-wide">
+          <div class="case-index">07 / RESULTS, LEARNINGS &amp; EVIDENCE</div>
+          <h2>Capture evidence after testing</h2>
+          <p>The source README describes evidence to collect but contains no test results or screenshots. Record the results from your own authorized setup:</p>
+          <ul>
+            <li>AP model and sanitized configuration screenshots.</li>
+            <li>A screenshot of the Windows network properties page showing client settings; redact public IPs and sensitive details.</li>
+            <li>Gateway ping and DNS lookup results.</li>
+            <li>File-share access from a second client, excluding personal data.</li>
+            <li>Coverage observations and a short troubleshooting log.</li>
+          </ul>
+          <p class="case-subsection">Key learning areas include isolating DHCP and DNS faults, confirming the client network profile, and checking SMB credentials and permissions separately from basic connectivity.</p>
+        </article>
+      </section>
+    </main>
+    <footer class="case-footer">
+      <span>WIRELESS / WINDOWS NETWORKING LAB</span>
+      <a href="../../../index.html#projects">← Back to portfolio projects</a>
+      <span>© <span id="case-year"></span> MUHAMMED SHAFI AM</span>
+    </footer>
+  </div>
+</body>
+</html>

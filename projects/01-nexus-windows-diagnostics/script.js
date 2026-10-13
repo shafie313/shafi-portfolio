@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{const year=document.getElementById("year");if(year)year.textContent=new Date().getFullYear();document.querySelectorAll('a[href="#top"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}));});

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Red Hat Linux Administration project briefing: a read-only Bash health snapshot for host, memory, storage, systemd service and network checks.">
+  <meta name="theme-color" content="#1A0D10">
+  <title>Red Hat Linux Administration | MUHAMMED SHAFI AM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../project-page.css">
+  <script src="../project-page.js" defer></script>
+</head>
+<body class="theme-rhel">
+  <div class="case-wrap">
+    <header class="case-header">
+      <a class="case-brand" href="../../../index.html#home">SHAFI AM<b>.</b> <span>/ PROJECTS</span></a>
+      <nav class="case-nav" aria-label="Project navigation">
+        <a class="case-back" href="../../../index.html#projects">← BACK TO PROJECTS</a>
+        <a class="case-home" href="../../../index.html#home">PORTFOLIO HOME</a>
+      </nav>
+    </header>
+    <main>
+      <section class="case-hero">
+        <div class="case-label">02 / LINUX / BASH / SYSTEMD</div>
+        <h1>Red Hat Linux Administration</h1>
+        <p class="case-lead">A Bash utility that records a read-only snapshot of a Linux host, including operating system details, uptime and load, memory, filesystems, block devices, a selected systemd service, IP addresses and the default route.</p>
+        <p class="case-notice">This is a script briefing, not a captured lab result. The source guide does not include sample host output or claim that the checks were run successfully.</p>
+        <div class="case-tags"><span>RHEL or other Linux</span><span>Bash</span><span>systemd</span><span>Text report</span><span>Read-only checks</span></div>
+        <div class="case-actions">
+          <a class="case-button" href="#checks">VIEW CHECKS</a>
+          <a class="case-button" href="rhel-health-check.sh" download>DOWNLOAD BASH SCRIPT</a>
+        </div>
+      </section>
+
+      <section class="case-grid" aria-label="Project briefing">
+        <article class="case-card">
+          <div class="case-index">01 / OBJECTIVE</div>
+          <h2>Collect a basic host snapshot</h2>
+          <p>Gather commonly useful Linux troubleshooting details into one timestamped text report. The script does not intentionally change system settings; it creates the report directory and file.</p>
+          <div class="case-subsection">
+            <h3>Environment</h3>
+            <ul>
+              <li>Bash on Red Hat Enterprise Linux or another Linux distribution.</li>
+              <li>Some commands may be missing on minimal installations.</li>
+              <li>The selected service defaults to <code>sshd</code>; another installed service can be supplied as an argument.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">02 / RUN THE SCRIPT</div>
+          <h2>Usage</h2>
+          <p>From the project directory, make the script executable and run it. Running without elevated privileges is the recommended first step.</p>
+          <div class="case-code">
+            <button class="case-copy" type="button">COPY</button>
+            <pre><code>chmod +x rhel-health-check.sh
+./rhel-health-check.sh
+
+# Optional output directory and service name:
+./rhel-health-check.sh ./reports sshd</code></pre>
+            <p class="case-copy-status" aria-live="polite"></p>
+          </div>
+          <p class="case-subsection">The report is written as <code>reports/linux-health-&lt;timestamp&gt;.txt</code> by default. Open that text file to review the collected sections.</p>
+        </article>
+
+        <article class="case-card case-card-wide" id="checks">
+          <div class="case-index">03 / CHECKS &amp; COMMANDS</div>
+          <h2>What the report covers</h2>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead><tr><th>Area</th><th>Commands / method</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Host and OS</td><td><code>hostname</code>, <code>/etc/os-release</code> or <code>uname -a</code></td><td>Record the host name and operating-system identification.</td></tr>
+                <tr><td>Uptime and load</td><td><code>uptime</code></td><td>Show uptime and system load information.</td></tr>
+                <tr><td>Memory</td><td><code>free -h</code></td><td>Display memory information in human-readable units.</td></tr>
+                <tr><td>Filesystem usage</td><td><code>df -hT</code></td><td>Show mounted filesystem space and filesystem type.</td></tr>
+                <tr><td>Block devices</td><td><code>lsblk</code></td><td>List block devices and their layout.</td></tr>
+                <tr><td>Service status</td><td><code>systemctl is-active</code>, <code>systemctl status</code></td><td>Check whether the selected service is active and include a short status excerpt when systemd is available.</td></tr>
+                <tr><td>Network</td><td><code>ip -brief address</code>, <code>ip route show default</code></td><td>Record assigned addresses and the default route.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">04 / IMPLEMENTATION</div>
+          <h2>Report workflow</h2>
+          <ol>
+            <li>Accept an optional report directory and service name, defaulting to <code>./reports</code> and <code>sshd</code>.</li>
+            <li>Create the output directory and a timestamped report file.</li>
+            <li>Write host, OS, uptime/load, memory, filesystem, block-device, service and network sections.</li>
+            <li>Print the report path so it can be opened for review.</li>
+          </ol>
+          <p class="case-callout"><strong>Interpret results carefully.</strong> This is a diagnostic snapshot, not an automated repair or a definitive health verdict. Command errors can appear in the report when a command is unavailable.</p>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">05 / TROUBLESHOOTING</div>
+          <h2>Common checks</h2>
+          <ul>
+            <li>If the output directory cannot be created, check the path and write permissions; the script exits with an error if directory creation fails.</li>
+            <li>If the service is not found or inactive, pass the name of an installed service as the second argument and review its status.</li>
+            <li>If <code>systemctl</code> is unavailable, the report records that condition.</li>
+            <li>On a minimal installation, review command output for tools that are not installed.</li>
+            <li>Run without <code>sudo</code> first; elevate only when a specific check requires it.</li>
+          </ul>
+        </article>
+
+        <article class="case-card case-card-wide">
+          <div class="case-index">06 / RESULTS, LEARNINGS &amp; EVIDENCE</div>
+          <h2>Evidence to review</h2>
+          <p>The README provides the report filename pattern and run instructions, but no captured output or screenshots. The documented learning focus is collecting host, storage, service and network context without treating a diagnostic snapshot as an automated repair or definitive health verdict. A typical completion message is formatted by the script as below; the timestamp and actual report contents depend on the machine where it is run.</p>
+          <div class="case-code">
+            <pre><code>Report saved to: ./reports/linux-health-&lt;timestamp&gt;.txt</code></pre>
+          </div>
+          <p class="case-copy-status">Output format shown from the script source; not a captured test result.</p>
+        </article>
+      </section>
+    </main>
+    <footer class="case-footer">
+      <span>LINUX ADMINISTRATION / PROJECT BRIEFING</span>
+      <a href="../../../index.html#projects">← Back to portfolio projects</a>
+      <span>© <span id="case-year"></span> MUHAMMED SHAFI AM</span>
+    </footer>
+  </div>
+</body>
+</html>

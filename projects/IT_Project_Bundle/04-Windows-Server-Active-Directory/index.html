@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Windows Server Active Directory lab briefing covering an isolated AD DS domain, DNS, OUs, users, groups and client verification.">
+  <meta name="theme-color" content="#121126">
+  <title>Windows Server Active Directory Lab | MUHAMMED SHAFI AM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../project-page.css">
+  <script src="../project-page.js" defer></script>
+</head>
+<body class="theme-active-directory">
+  <div class="case-wrap">
+    <header class="case-header">
+      <a class="case-brand" href="../../../index.html#home">SHAFI AM<b>.</b> <span>/ PROJECTS</span></a>
+      <nav class="case-nav" aria-label="Project navigation">
+        <a class="case-back" href="../../../index.html#projects">← BACK TO PROJECTS</a>
+        <a class="case-home" href="../../../index.html#home">PORTFOLIO HOME</a>
+      </nav>
+    </header>
+    <main>
+      <section class="case-hero">
+        <div class="case-label">04 / WINDOWS SERVER / ACTIVE DIRECTORY</div>
+        <h1>Windows Server Active Directory Lab</h1>
+        <p class="case-lead">A guided, isolated virtual lab for practising AD DS and DNS role installation, domain-controller promotion, organizational units, test users, security groups and a Windows client domain join.</p>
+        <p class="case-notice">This is a guided lab plan, not a completed deployment report. The PowerShell examples below come from the project guide; use disposable virtual machines, snapshots and lab-only credentials.</p>
+        <div class="case-tags"><span>Windows Server</span><span>Active Directory</span><span>Server Manager</span><span>DNS Manager</span><span>Virtual lab</span></div>
+        <div class="case-actions">
+          <a class="case-button case-button-primary" href="#implementation">VIEW IMPLEMENTATION ↓</a>
+          <a class="case-button" href="#troubleshooting">GUI TROUBLESHOOTING</a>
+        </div>
+      </section>
+
+      <section class="case-grid" aria-label="Project briefing">
+        <article class="case-card">
+          <div class="case-index">01 / OBJECTIVE</div>
+          <h2>Practise basic domain administration</h2>
+          <p>Build a small isolated domain, organize lab accounts, check group membership and verify that a client can find and join the domain.</p>
+          <div class="case-subsection">
+            <h3>Suggested virtual environment</h3>
+            <ul>
+              <li>Windows Server evaluation VM: static address <code>192.168.50.10/24</code>.</li>
+              <li>Windows 10/11 client VM: <code>192.168.50.20/24</code>, DNS set to <code>192.168.50.10</code>.</li>
+              <li>Lab domain: <code>adlab.test</code>; this example is for the lab and not a public internet domain.</li>
+              <li>Use an Internal/Host-only virtual network and take VM snapshots first.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">02 / DOMAIN CONFIGURATION</div>
+          <h2>Server Manager workflow</h2>
+          <ol>
+            <li>In <strong>Server Manager → Local Server</strong>, rename the server to a lab name such as <code>DC01</code>. In Windows network adapter properties, assign the suggested static server address and subnet.</li>
+            <li>In <strong>Server Manager → Manage → Add Roles and Features</strong>, install <strong>Active Directory Domain Services</strong> and <strong>DNS Server</strong>.</li>
+            <li>After installation, select the Server Manager notification flag and choose <strong>Promote this server to a domain controller</strong>.</li>
+            <li>Choose <strong>Add a new forest</strong> and enter <code>adlab.test</code>. Set a strong lab-only Directory Services Restore Mode password, review prerequisites, install, and let the server restart.</li>
+            <li>After restart, use <strong>Server Manager → Tools</strong> to open Active Directory Users and Computers and DNS Manager.</li>
+          </ol>
+        </article>
+
+        <article class="case-card case-card-wide" id="implementation">
+          <div class="case-index">03 / IMPLEMENTATION</div>
+          <h2>Organize users and verify the client</h2>
+          <ol>
+            <li>In <strong>Active Directory Users and Computers</strong>, right-click the domain, choose <strong>New → Organizational Unit</strong>, and create <code>Lab-Users</code> and <code>Lab-Groups</code>.</li>
+            <li>Right-click <code>Lab-Groups</code>, choose <strong>New → Group</strong>, create <code>IT-Support-Lab</code>, and select a security group with the Global scope.</li>
+            <li>Right-click <code>Lab-Users</code>, choose <strong>New → User</strong>, and create a lab-only test user. Open the user's properties, choose <strong>Member Of → Add</strong>, and add <code>IT-Support-Lab</code>.</li>
+            <li>On the client, open the network adapter's IPv4 properties and set DNS to <code>192.168.50.10</code>. In DNS Manager on the server, confirm the lab DNS zone is present; on the client, use the network and domain settings pages to verify the connection before joining <code>adlab.test</code> with authorized lab credentials.</li>
+            <li>Join the domain through <strong>Settings → System → About → Domain or workgroup</strong> (the exact wording varies by Windows edition), then restart if prompted.</li>
+            <li>Sign in with the lab domain account. In Active Directory Users and Computers, open the group properties and <strong>Members</strong> tab to visually verify membership.</li>
+          </ol>
+          <p class="case-callout"><strong>Safety:</strong> AD DS promotion and network changes can affect connectivity. Keep this work in a disposable virtual lab; do not use production accounts or passwords.</p>
+        </article>
+
+        <article class="case-card case-card-wide" id="commands">
+          <div class="case-index">04 / COMMANDS &amp; CONFIGURATION</div>
+          <h2>Optional Active Directory PowerShell examples</h2>
+          <p>These examples are documented in the project README. Run them in an elevated PowerShell session on the lab domain controller after AD DS is installed and the domain is available. Check for existing objects before running creation commands.</p>
+          <div class="case-code">
+            <pre><code># Verify the lab domain and controller
+Get-ADDomain
+Get-ADForest
+Get-ADDomainController -Filter *
+
+# Create the documented lab OUs and security group
+New-ADOrganizationalUnit -Name 'Lab-Users' -Path 'DC=adlab,DC=test'
+New-ADOrganizationalUnit -Name 'Lab-Groups' -Path 'DC=adlab,DC=test'
+New-ADGroup -Name 'IT-Support-Lab' -SamAccountName 'IT-Support-Lab' `
+  -GroupScope Global -GroupCategory Security -Path 'OU=Lab-Groups,DC=adlab,DC=test'
+
+# Prompt for a lab-only password; do not store credentials in a script
+$Password = Read-Host 'Enter a strong lab-only password' -AsSecureString
+New-ADUser -Name 'Lab User' -SamAccountName 'lab.user' `
+  -UserPrincipalName 'lab.user@adlab.test' -Path 'OU=Lab-Users,DC=adlab,DC=test' `
+  -AccountPassword $Password -Enabled $true
+Add-ADGroupMember -Identity 'IT-Support-Lab' -Members 'lab.user'
+Get-ADGroupMember 'IT-Support-Lab'</code></pre>
+          </div>
+          <p class="case-callout"><strong>Configuration:</strong> The example domain is <code>adlab.test</code>; the suggested server/client addresses are <code>192.168.50.10/24</code> and <code>192.168.50.20/24</code>, with the client DNS set to <code>192.168.50.10</code>. Confirm the distinguished names match your own disposable lab.</p>
+        </article>
+
+        <article class="case-card case-card-wide" id="administration">
+          <div class="case-index">05 / GUI ADMINISTRATION</div>
+          <h2>Review domain objects in the management consoles</h2>
+          <ul>
+            <li>Use <strong>Active Directory Users and Computers</strong> to browse the domain tree and review the lab organizational units, test user and security group.</li>
+            <li>Open the test user's properties and use <strong>Member Of</strong> to inspect group membership.</li>
+            <li>Use <strong>DNS Manager</strong> from Server Manager's Tools menu to review the lab DNS zone.</li>
+            <li>On the client, use Windows Settings to review the network's DNS server and domain membership.</li>
+          </ul>
+          <p class="case-callout"><strong>Existing objects:</strong> Before creating an OU, group or user, look for it in the management console. Reuse or review existing lab objects rather than creating duplicates.</p>
+        </article>
+
+        <article class="case-card" id="troubleshooting">
+          <div class="case-index">06 / GUI TROUBLESHOOTING</div>
+          <h2>Inspect the configuration visually</h2>
+          <ul>
+            <li>If the client cannot locate the domain, open its network adapter's IPv4 properties and confirm DNS points to the domain controller. Review the DNS zone in DNS Manager.</li>
+            <li>If a domain join or sign-in fails, return to Windows Settings and check the client's network connection, DNS server and displayed domain/workgroup status.</li>
+            <li>If an OU, user or group appears missing, refresh the domain tree in Active Directory Users and Computers and check the correct OU before creating anything again.</li>
+            <li>If a user lacks expected group access, inspect the user's <strong>Member Of</strong> tab and the group's <strong>Members</strong> tab.</li>
+          </ul>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">07 / RESULTS, LEARNINGS &amp; EVIDENCE</div>
+          <h2>Capture after you complete the lab</h2>
+          <p>The README defines verification evidence, but does not include executed results. No successful domain setup is claimed here. The documented learning focus is how DNS, OU placement, group membership and client configuration work together during a basic domain join. Collect your own evidence after completing the steps:</p>
+          <ul>
+            <li>Server Manager showing AD DS/DNS installed.</li>
+            <li>Active Directory Users and Computers showing the lab OUs, user and group.</li>
+            <li>The test user's properties showing membership in the lab security group.</li>
+            <li>Windows client Settings showing its lab domain membership and network DNS configuration.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <footer class="case-footer">
+      <span>WINDOWS SERVER / TRAINING LAB</span>
+      <a href="../../../index.html#projects">← Back to portfolio projects</a>
+      <span>© <span id="case-year"></span> MUHAMMED SHAFI AM</span>
+    </footer>
+  </div>
+</body>
+</html>

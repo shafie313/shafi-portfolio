@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0c">
+  <meta name="description" content="MUHAMMED SHAFI AM — IT Support Specialist, RHCSA certified, with hands-on desktop support experience supporting Southern Naval Command through Techfruit Solutions.">
+  <title>MUHAMMED SHAFI AM | IT Support Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Muhammed Shafi AM home">
+      <span class="brand-mark">M<span>.</span></span>
+      <span class="brand-name">SHAFI AM<small>IT SUPPORT / SYSTEMS</small></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+      <span></span><span></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#skills">Expertise</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certification</a>
+      <a class="nav-contact" href="#contact">Contact <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-wrap" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> IT SUPPORT <i>•</i> WINDOWS <i>•</i> LINUX <i>•</i> NETWORKING</p>
+        <h1>I KEEP SYSTEMS <span>RUNNING.</span></h1>
+        <p class="hero-role">IT DESKTOP SUPPORT ENGINEER <span>|</span> RHCSA CERTIFIED</p>
+        <p class="hero-intro">I help people get back to work by diagnosing desktop, operating system and connectivity issues with a calm, methodical approach. Bringing 2+ years of hands-on support experience to IT teams in Dubai.</p>
+        <div class="hero-proof">
+          <div><strong>2+</strong><span>YEARS EXPERIENCE</span></div>
+          <div><strong>RHCSA</strong><span>RED HAT CERTIFIED</span></div>
+          <div><strong>04</strong><span>SELECTED PROJECTS</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Interactive workstation boot experience">
+        <div class="monitor-scene" id="boot-monitor" data-state="standby" style="--boot-progress: 0">
+          <div class="network-grid" aria-hidden="true"></div>
+          <span class="monitor-hud hud-left" aria-hidden="true">WS-01 <i>·</i> LOCAL CONSOLE</span>
+          <span class="monitor-hud hud-right" aria-hidden="true">SECURE BOOT / 2026</span>
+          <div class="monitor">
+            <div class="monitor-bezel">
+              <div class="monitor-screen" aria-live="polite">
+                <div class="screen-backlight" aria-hidden="true"></div>
+                <div class="screen-noise" aria-hidden="true"></div>
+                <div class="screen-scanlines" aria-hidden="true"></div>
+                <div class="screen-glitch" aria-hidden="true"></div>
+                <div class="boot-console">
+                  <span class="boot-brand">SHAFI<span>/</span>SUPPORT <i>BIOS v2.6</i></span>
+                  <p class="boot-line" data-step="18"><i>01</i> INITIALIZING HARDWARE<span class="boot-result">OK</span></p>
+                  <p class="boot-line" data-step="39"><i>02</i> CHECKING SYSTEM INTEGRITY<span class="boot-result">PASS</span></p>
+                  <p class="boot-line" data-step="61"><i>03</i> LOADING IT SUPPORT ENVIRONMENT<span class="boot-result">READY</span></p>
+                  <p class="boot-line boot-complete" data-step="83"><i>04</i> SYSTEM ONLINE<span class="boot-result">100%</span></p>
+                </div>
+                <div class="welcome-screen">
+                  <span class="welcome-kicker"><i></i> WORKSTATION SESSION ESTABLISHED</span>
+                  <h2>MUHAMMED<br>SHAFI AM<span>.</span></h2>
+                  <p class="welcome-role">IT DESKTOP SUPPORT ENGINEER</p>
+                  <span class="welcome-cert">RHCSA CERTIFIED <i>·</i> DUBAI / UAE</span>
+                  <div class="welcome-status">
+                    <p><span>WORKSTATION</span><b><i></i> ONLINE</b></p>
+                    <p><span>NETWORK</span><b><i></i> CONNECTED</b></p>
+                    <p><span>DIAGNOSTICS</span><b><i></i> READY</b></p>
+                  </div>
+                  <div class="welcome-actions">
+                    <a href="#about">EXPLORE MY WORK <span>↘</span></a>
+                    <a href="#projects">VIEW MY PROJECTS <span>↘</span></a>
+                  </div>
+                </div>
+                <span class="screen-corner screen-corner-tl" aria-hidden="true"></span>
+                <span class="screen-corner screen-corner-br" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="monitor-lower-bezel"><span>SHAFI / WORKSTATION</span><i class="monitor-power-led"></i></div>
+          </div>
+          <div class="monitor-stand" aria-hidden="true"><span></span></div>
+          <div class="monitor-base" aria-hidden="true"></div>
+          <div class="monitor-reflection" aria-hidden="true"></div>
+          <div class="boot-controls">
+            <div class="boot-status"><span>SYSTEM STATUS:</span><strong id="boot-status-text">STANDBY</strong><button class="boot-reset" id="boot-reset" type="button" aria-label="Reset workstation boot" hidden>↻ REBOOT</button></div>
+            <div class="boot-slider" id="boot-slider" role="slider" tabindex="0" aria-label="Slide to boot workstation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="System standby. Use arrow keys to boot." aria-describedby="boot-instructions">
+              <span class="slider-track-fill" aria-hidden="true"></span>
+              <span class="slider-instruction" id="boot-instructions">SLIDE TO BOOT SYSTEM <span>→</span></span>
+              <span class="slider-handle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v10M6.2 5.8a8 8 0 1 0 11.6 0"/></svg></span>
+            </div>
+            <span class="sr-only" id="boot-live-status" aria-live="polite">System status: standby.</span>
+          </div>
+        </div>
+        <span class="visual-index">FIG. 01 — INTERACTIVE WORKSTATION</span>
+      </div>
+    </section>
+
+    <section class="metrics-strip">
+      <div><span class="metric-label">BASED IN</span><strong>Kerala, India</strong></div>
+      <div><span class="metric-label">TARGET MARKET</span><strong>Dubai / UAE</strong></div>
+      <div><span class="metric-label">CORE FOCUS</span><strong>IT Operations</strong></div>
+      <div><span class="metric-label">CERTIFICATION</span><strong>RHCSA</strong></div>
+    </section>
+
+    <section class="content-section section-wrap" id="about">
+      <div class="section-heading"><span class="section-index">01 / ABOUT</span><span class="heading-rule"></span></div>
+      <div class="about-layout">
+        <div>
+          <p class="section-overline">PRACTICAL THINKING. REAL SOLUTIONS.</p>
+          <h2>Technology should<br>just <span>work.</span></h2>
+        </div>
+        <div class="about-copy">
+          <p>I’m MUHAMMED SHAFI AM, an IT Support Specialist focused on keeping end-user systems stable, secure and productive. My experience includes desktop support, Windows installation and recovery, driver management, printer troubleshooting and network diagnostics. I have supported IT operations at Headquarters, Southern Naval Command, Kochi, through Techfruit Solutions.</p>
+          <p>I also hold the Red Hat Certified System Administrator (RHCSA) credential, adding a Linux administration foundation to my Windows and IT support experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section section-wrap" id="skills">
+      <div class="section-heading"><span class="section-index">02 / EXPERTISE</span><span class="heading-rule"></span></div>
+      <div class="section-title-row"><div><p class="section-overline">TOOLS I WORK WITH</p><h2>Technical <span>capabilities.</span></h2></div><p class="section-side-note">Hands-on support skills for reliable day-to-day IT operations.</p></div>
+      <div class="skills-grid">
+        <article class="skill-card"><div class="skill-top"><span class="skill-symbol">OS</span><span class="card-number">01</span></div><h3>Operating Systems</h3><p>Windows installation, OS recovery, updates, driver management and system troubleshooting.</p><div class="skill-tags"><span>Windows 10/11</span><span>RHEL</span><span>DISM</span></div><div class="os-brand-row"><span class="os-brand"><svg class="windows-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M1.5 4.5 10.5 3.2v8H1.5V4.5zm11-1.6 10-1.4v9.7h-10V2.9zM1.5 12.8h9v8L1.5 19.5v-6.7zm11 0h10v9.7l-10-1.4v-8.3z"/></svg> WINDOWS</span><span class="os-brand"><svg class="redhat-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.009 13.386c1.577 0 3.86-.326 3.86-2.202a1.765 1.765 0 0 0-.04-.431l-.94-4.08c-.216-.898-.406-1.305-1.982-2.093-1.223-.625-3.888-1.658-4.676-1.658-.733 0-.947.946-1.822.946-.842 0-1.467-.706-2.255-.706-.757 0-1.25.515-1.63 1.576 0 0-1.06 2.99-1.197 3.424a.81.81 0 0 0-.028.245c0 1.162 4.577 4.974 10.71 4.974m4.101-1.435c.218 1.032.218 1.14.218 1.277 0 1.765-1.984 2.745-4.593 2.745-5.895.004-11.06-3.451-11.06-5.734a2.326 2.326 0 0 1 .19-.925C2.746 9.415 0 9.794 0 12.217c0 3.969 9.405 8.861 16.851 8.861 5.71 0 7.149-2.582 7.149-4.62 0-1.605-1.387-3.425-3.887-4.512"/></svg> RED HAT LINUX</span></div></article>
+        <article class="skill-card"><div class="skill-top"><span class="skill-symbol">NW</span><span class="card-number">02</span></div><h3>Networking</h3><p>IP addressing, subnetting, DNS, DHCP, gateway checks and basic switch configuration.</p><div class="skill-tags"><span>TCP/IP</span><span>DNS / DHCP</span><span>VLAN Basics</span></div></article>
+        <article class="skill-card"><div class="skill-top"><span class="skill-symbol">HW</span><span class="card-number">03</span></div><h3>Hardware & Printers</h3><p>PC diagnostics, driver installation, printer setup, print queues and peripheral troubleshooting.</p><div class="skill-tags"><span>Drivers</span><span>Printers</span><span>Hardware</span></div></article>
+        <article class="skill-card"><div class="skill-top"><span class="skill-symbol">PS</span><span class="card-number">04</span></div><h3>PowerShell & Automation</h3><p>PowerShell scripts for repeatable diagnostic checks and structured reporting.</p><div class="skill-tags"><span>PowerShell</span><span>HTML Reports</span><span>CSV</span></div></article>
+        <article class="skill-card"><div class="skill-top"><span class="skill-symbol">IT</span><span class="card-number">05</span></div><h3>IT Operations</h3><p>End-user support, incident investigation, software installation and clear issue documentation.</p><div class="skill-tags"><span>Desktop Support</span><span>Troubleshooting</span></div></article>
+        <article class="skill-card"><div class="skill-top"><span class="skill-symbol">LX</span><span class="card-number">06</span></div><h3>Linux Administration</h3><p>RHCSA-backed Linux administration fundamentals, system services, users, storage and troubleshooting.</p><div class="skill-tags"><span>RHEL</span><span>Services</span><span>Storage</span></div></article>
+      </div>
+    </section>
+
+    <section class="content-section section-wrap projects-section" id="projects">
+      <div class="section-heading"><span class="section-index">03 / SELECTED PROJECTS</span><span class="heading-rule"></span></div>
+      <div class="section-title-row"><div><p class="section-overline">PRACTICAL WORK &amp; LAB GUIDES</p><h2>Projects built around <span>real support tasks.</span></h2></div><p class="section-side-note">Explore Windows, Linux, networking and directory-service project briefings.</p></div>
+      <div class="projects-grid">
+        <article class="project-card project-card-stack project-card-nexus">
+          <div class="project-visual"><div class="terminal-window"><div class="terminal-head"><i></i><i></i><i></i><span>nexus-diagnostics.ps1</span></div><div class="terminal-content"><p><em>›</em> NEXUS v3.0 / read-only checks</p><p><em>›</em> Windows, storage, network and services</p><p><em>›</em> Outputs: timestamped HTML + CSV</p><p class="terminal-ok">PROJECT OVERVIEW — NOT LIVE RESULTS</p></div></div><span class="visual-caption">PROJECT 01 / POWERSHELL / CONCEPT VISUAL</span></div>
+          <div class="project-details"><div class="project-meta"><span>WINDOWS / POWERSHELL</span><span>01</span></div><h3>NEXUS — Windows IT Diagnostics Toolkit</h3><p>A read-only PowerShell toolkit for selected Windows support checks, with timestamped HTML and CSV reports.</p><div class="skill-tags"><span>PowerShell</span><span>Windows 10/11</span><span>HTML</span><span>CSV</span></div><div class="project-actions"><a class="text-link nexus-tour" href="projects/01-nexus-windows-diagnostics/index.html">TAKE A TOUR <span>↗</span></a></div></div>
+        </article>
+        <article class="project-card project-card-stack project-card-rhel">
+          <div class="project-visual project-visual-summary"><span class="visual-caption">TRAINING LAB / LINUX SYSTEMS</span><ul class="project-summary-list"><li>Host, OS &amp; uptime</li><li>Memory, disks &amp; filesystems</li><li>systemd service status</li><li>IP addresses &amp; default route</li></ul></div>
+          <div class="project-details"><div class="project-meta"><span>RHEL / BASH / SYSTEMD</span><span>02</span></div><h3>Red Hat Linux Administration</h3><p>A read-only Bash health snapshot for Linux host, memory, storage, service and network checks. The timestamped report helps organize information for troubleshooting.</p><div class="skill-tags"><span>RHEL</span><span>Bash</span><span>systemd</span><span>Linux troubleshooting</span></div><div class="project-actions"><a class="text-link" href="projects/IT_Project_Bundle/03-RHEL-Basic-Health-Check/index.html">VIEW PROJECT <span>↗</span></a></div></div>
+        </article>
+        <article class="project-card project-card-stack project-card-wireless">
+          <div class="project-visual project-visual-summary"><span class="visual-caption">PRACTICAL NETWORKING LAB</span><ul class="project-summary-list"><li>Access point &amp; Wi-Fi security</li><li>Client IP, gateway &amp; DNS</li><li>Local Windows SMB share</li><li>Connectivity troubleshooting</li></ul></div>
+          <div class="project-details"><div class="project-meta"><span>WI-FI / TCP/IP / SMB</span><span>03</span></div><h3>Wireless Access Point &amp; File Sharing</h3><p>A documented home/office networking lab for access point setup, wireless client connectivity and permission-aware local file sharing.</p><div class="skill-tags"><span>Wi-Fi</span><span>TCP/IP</span><span>SMB</span><span>Windows Networking</span></div><div class="project-actions"><a class="text-link" href="projects/IT_Project_Bundle/06-Wireless-AP-File-Sharing/index.html">VIEW PROJECT <span>↗</span></a></div></div>
+        </article>
+        <article class="project-card project-card-stack project-card-active-directory">
+          <div class="project-visual project-visual-summary"><span class="visual-caption">ISOLATED VIRTUAL TRAINING LAB</span><ul class="project-summary-list"><li>AD DS &amp; DNS domain setup</li><li>Organizational units</li><li>Users &amp; security groups</li><li>Client domain verification</li></ul></div>
+          <div class="project-details"><div class="project-meta"><span>WINDOWS SERVER / ACTIVE DIRECTORY</span><span>04</span></div><h3>Windows Server Active Directory Lab</h3><p>A guided, isolated virtual lab for domain controller setup, DNS, organizational units, user accounts, security groups and basic client verification.</p><div class="skill-tags"><span>Windows Server</span><span>Active Directory</span><span>PowerShell</span><span>DNS</span></div><div class="project-actions"><a class="text-link" href="projects/IT_Project_Bundle/04-Windows-Server-Active-Directory/index.html">VIEW PROJECT <span>↗</span></a></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section section-wrap" id="certifications">
+      <div class="section-heading"><span class="section-index">04 / CERTIFICATION</span><span class="heading-rule"></span></div>
+      <article class="rh-cert-banner">
+        <div class="rh-cert-content"><div class="rh-cert-brand"><svg class="rh-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.009 13.386c1.577 0 3.86-.326 3.86-2.202a1.765 1.765 0 0 0-.04-.431l-.94-4.08c-.216-.898-.406-1.305-1.982-2.093-1.223-.625-3.888-1.658-4.676-1.658-.733 0-.947.946-1.822.946-.842 0-1.467-.706-2.255-.706-.757 0-1.25.515-1.63 1.576 0 0-1.06 2.99-1.197 3.424a.81.81 0 0 0-.028.245c0 1.162 4.577 4.974 10.71 4.974m4.101-1.435c.218 1.032.218 1.14.218 1.277 0 1.765-1.984 2.745-4.593 2.745-5.895.004-11.06-3.451-11.06-5.734a2.326 2.326 0 0 1 .19-.925C2.746 9.415 0 9.794 0 12.217c0 3.969 9.405 8.861 16.851 8.861 5.71 0 7.149-2.582 7.149-4.62 0-1.605-1.387-3.425-3.887-4.512"/></svg><span class="rh-brand-name">Red Hat</span><span class="rh-certified">CERTIFIED</span></div><p class="section-overline">LINUX SYSTEM ADMINISTRATION</p><h2>Red Hat Certified<br><span>System Administrator</span></h2><div class="credential-code">Certification ID: 260-006-598</div><p class="rh-description">Professional certification in Red Hat Enterprise Linux administration, covering system configuration, users and groups, storage, services and troubleshooting.</p><a class="text-link" href="https://www.redhat.com/en/services/certification/rhcsa" target="_blank" rel="noopener noreferrer">OFFICIAL CERTIFICATION DETAILS <span>↗</span></a></div><span class="rh-watermark" aria-hidden="true">RH</span>
+      </article>
+    </section>
+
+    <section class="contact-section section-wrap" id="contact">
+      <div class="section-heading"><span class="section-index">05 / CONTACT</span><span class="heading-rule"></span></div>
+      <div class="contact-layout"><div><p class="section-overline">LET'S CONNECT</p><h2>Need reliable<br><span>IT support?</span></h2><p class="contact-copy">Available to discuss IT Support and Desktop Support opportunities in Dubai and the UAE.</p></div><div class="contact-actions"><a class="contact-link" href="mailto:muhammedshafiam2001@gmail.com"><span>Email</span><strong>muhammedshafiam2001@gmail.com ↗</strong></a><a class="contact-link" href="tel:+971563536440"><span>Phone</span><strong>056 353 6440 ↗</strong></a><a class="contact-link" href="https://www.linkedin.com/in/muhammedshafiam2001" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>linkedin.com/in/muhammedshafiam2001 ↗</strong></a><a class="contact-link" href="assets/MUHAMMED%20SHAFI%20AM.pdf" target="_blank" rel="noopener noreferrer"><span>Resume</span><strong>View CV ↗</strong></a></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-mark">M<span>.</span></span><span class="brand-name">SHAFI AM<small>IT SUPPORT / SYSTEMS</small></span></a><span>© <span id="year"></span> MUHAMMED SHAFI AM</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
+</body>
+</html>

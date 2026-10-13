@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="NEXUS is a read-only Windows PowerShell diagnostics toolkit that creates HTML and CSV reports for IT troubleshooting.">
+  <meta name="theme-color" content="#0B1424">
+  <title>NEXUS — Windows IT Diagnostics Toolkit | MUHAMMED SHAFI AM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="theme-nexus">
+  <div class="wrap">
+    <header class="top" id="top">
+      <a class="brand" href="../../index.html">SHAFI AM<b>.</b> <span>/ PROJECTS</span></a>
+      <a class="back" href="../../index.html">← BACK TO PORTFOLIO</a>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">01 / WINDOWS / POWERSHELL</div>
+          <h1>NEXUS<br><span>—</span> Windows IT Diagnostics Toolkit</h1>
+          <p class="lead">A read-only PowerShell toolkit that gathers selected Windows, hardware, network and support-service checks, then saves the results as HTML and CSV reports.</p>
+          <div class="tags">
+            <span>PowerShell 5.1+</span>
+            <span>Windows 10 / 11</span>
+            <span>Read-only checks</span>
+            <span>HTML + CSV reports</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="#downloads">GET THE PROJECT FILES <span aria-hidden="true">↓</span></a>
+            <a class="btn" href="#what-it-checks">SEE WHAT IT CHECKS <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <figure class="visual-art">
+          <img src="assets/nexus-workflow.svg" alt="Illustration of a Windows PC sending diagnostic checks through NEXUS to HTML and CSV reports">
+          <figcaption>Project concept illustration — not a live diagnostic result.</figcaption>
+        </figure>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <div class="label">01 / THE PROBLEM</div>
+          <h2>A clearer first look.</h2>
+          <p>When a PC has a problem, a support technician may need to check several parts of Windows before deciding what to investigate next.</p>
+        </article>
+        <article class="card">
+          <div class="label">02 / THE APPROACH</div>
+          <h2>One repeatable check.</h2>
+          <p>NEXUS gathers its supported checks in one script and saves a timestamped report. The technician reviews the findings and chooses the next step.</p>
+        </article>
+        <article class="card wide">
+          <div class="label">03 / WHAT IT CHECKS</div>
+          <h2>A practical support snapshot.</h2>
+          <p class="section-intro">These are the checks in the supplied v3.0 script. Some results depend on the computer, permissions and network policy.</p>
+          <div class="check-grid" id="what-it-checks">
+            <section class="check-item">
+              <span class="check-icon" aria-hidden="true">01</span>
+              <div><h3>Computer &amp; storage</h3><p>Windows version, computer model, processor, memory use, uptime and fixed-disk free space.</p></div>
+            </section>
+            <section class="check-item">
+              <span class="check-icon" aria-hidden="true">02</span>
+              <div><h3>Network connectivity</h3><p>IPv4, gateway, DNS servers and adapters; DNS and HTTPS checks; and a short ping/latency check.</p></div>
+            </section>
+            <section class="check-item">
+              <span class="check-icon" aria-hidden="true">03</span>
+              <div><h3>Services &amp; printers</h3><p>DHCP Client and Print Spooler service states, installed printers and visible print jobs.</p></div>
+            </section>
+            <section class="check-item">
+              <span class="check-icon" aria-hidden="true">04</span>
+              <div><h3>Windows &amp; security signals</h3><p>Selected software and activation details, recent update/shutdown events and endpoint-protection service states.</p></div>
+            </section>
+          </div>
+          <p class="caution"><strong>Important:</strong> NEXUS does not repair the computer. A failed ping alone does not prove the network is down, and a reported status is only a starting point for investigation.</p>
+        </article>
+        <article class="card wide">
+          <div class="label">04 / HOW IT WORKS</div>
+          <h2>From script to useful report.</h2>
+          <div class="steps">
+            <article class="step"><div class="stepnum">01 / STEP</div><h3>Run on Windows</h3><p>Use the script on a Windows 10 or 11 computer you own or are authorized to support.</p></article>
+            <article class="step"><div class="stepnum">02 / STEP</div><h3>Collect checks</h3><p>The script reads selected system details and runs its configured network and service checks.</p></article>
+            <article class="step"><div class="stepnum">03 / STEP</div><h3>Save two reports</h3><p>A timestamped HTML report and CSV file are saved in a <code>Reports</code> folder beside the script.</p></article>
+            <article class="step"><div class="stepnum">04 / STEP</div><h3>Review before acting</h3><p>Use the results as clues. Verify findings and follow your organization’s support process.</p></article>
+          </div>
+        </article>
+        <article class="card">
+          <div class="label">05 / PLAIN ENGLISH</div>
+          <h2>What is PowerShell?</h2>
+          <p>PowerShell is a Windows command-line tool and scripting language. A script is a saved set of instructions; NEXUS uses it to repeat selected checks and organize their output.</p>
+        </article>
+        <article class="card">
+          <div class="label">06 / SAFETY &amp; SCOPE</div>
+          <h2>Read-only, not risk-free.</h2>
+          <p>The v3.0 script is designed for read-only diagnostics and does not perform automatic repairs. Network tests contact Microsoft services and 1.1.1.1; follow local policy and use an authorized computer.</p>
+        </article>
+        <article class="card wide" id="downloads">
+          <div class="label">07 / DOWNLOADS</div>
+          <h2>Project files.</h2>
+          <p>Download the actual v3.0 PowerShell script or the short presentation explaining its purpose, checks, workflow and limitations.</p>
+          <div class="actions">
+            <a class="btn primary" href="assets/NEXUS_Windows_IT_Diagnostics_Toolkit_v3.ps1" download>POWERSHELL SCRIPT <span aria-hidden="true">↓</span></a>
+            <a class="btn" href="assets/NEXUS_Windows_IT_Diagnostics_Project.pptx" download>PROJECT PRESENTATION (.PPTX) <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="download-note">Before running a script, review it and follow your organization’s security rules. The included script asks for its configured access password; this simple prompt is not strong security.</p>
+        </article>
+        <article class="card wide">
+          <div class="label">08 / INTERVIEW INTRODUCTION</div>
+          <h2>Explain it honestly.</h2>
+          <blockquote>“NEXUS is a read-only Windows diagnostics project written in PowerShell. It checks selected system, storage, network and support-service information, then creates HTML and CSV reports. I use the results to practise structured troubleshooting; the script does not automatically repair problems.”</blockquote>
+          <p class="note">A generated illustration and presentation help explain the project; they are not screenshots or proof of a successful run. Add real results only after testing the script on an authorized Windows computer.</p>
+        </article>
+      </section>
+    </main>
+    <footer class="footer">
+      <span>© <span id="year"></span> MUHAMMED SHAFI AM</span>
+      <span>IT SUPPORT / WINDOWS / LINUX / NETWORKING</span>
+      <a href="#top">BACK TO TOP ↑</a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Windows PC Health Check project briefing: a read-only PowerShell snapshot for system, storage, network and service checks with CSV and HTML reports.">
+  <meta name="theme-color" content="#0B1120">
+  <title>Windows PC Health Check | MUHAMMED SHAFI AM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../project-page.css">
+  <script src="../project-page.js" defer></script>
+</head>
+<body class="theme-windows">
+  <div class="case-wrap">
+    <header class="case-header">
+      <a class="case-brand" href="../../../index.html#home">SHAFI AM<b>.</b> <span>/ PROJECTS</span></a>
+      <nav class="case-nav" aria-label="Project navigation">
+        <a class="case-back" href="../../../index.html#projects">← BACK TO PROJECTS</a>
+        <a class="case-home" href="../../../index.html#home">PORTFOLIO HOME</a>
+      </nav>
+    </header>
+    <main>
+      <section class="case-hero">
+        <div class="case-label">WINDOWS / POWERSHELL / STANDALONE REFERENCE</div>
+        <h1>Windows PC Health Check</h1>
+        <p class="case-lead">A read-only PowerShell snapshot for Windows 10/11 that gathers computer, operating-system, processor, memory, fixed-disk, network and selected service details into timestamped CSV and HTML reports.</p>
+        <p class="case-notice">This page documents the included script and its intended behavior. No completed run, sample report or successful test result is supplied with the project.</p>
+        <div class="case-tags"><span>Windows 10/11</span><span>PowerShell 5.1+</span><span>CIM</span><span>IP configuration</span><span>CSV + HTML</span><span>Read-only checks</span></div>
+        <div class="case-actions">
+          <a class="case-button case-button-primary" href="#implementation">VIEW IMPLEMENTATION ↓</a>
+          <a class="case-button" href="Windows-PC-Health-Check.ps1" download>DOWNLOAD SCRIPT</a>
+        </div>
+      </section>
+
+      <section class="case-grid" aria-label="Project briefing">
+        <article class="case-card">
+          <div class="case-index">01 / PROJECT OVERVIEW</div>
+          <h2>Turn routine checks into a readable snapshot</h2>
+          <p>The toolkit collects selected workstation information and formats the checks as rows with a timestamp, category, check name, value and status. It is intended to support investigation, not make a definitive health judgment or repair the computer.</p>
+          <div class="case-subsection">
+            <h3>Objectives</h3>
+            <ul>
+              <li>Collect common Windows support details in one repeatable run.</li>
+              <li>Identify disk free-space values and selected Windows service states for follow-up.</li>
+              <li>Export the collected rows to CSV and a simple HTML report for review.</li>
+              <li>Keep checks read-only; the script does not change Windows configuration.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">02 / ENVIRONMENT &amp; TOOLS</div>
+          <h2>Windows desktop support context</h2>
+          <ul>
+            <li>Windows 10/11 test computer and Windows PowerShell 5.1 or newer.</li>
+            <li>Standard user rights are sufficient for most checks; some details may be unavailable.</li>
+            <li>PowerShell CIM queries for OS, CPU and logical-disk information.</li>
+            <li><code>Get-NetIPConfiguration</code> for IPv4, gateway and DNS information.</li>
+            <li><code>Get-Service</code> for the configured service checks: Spooler, Dhcp, Dnscache and Winmgmt by default.</li>
+          </ul>
+          <p class="case-callout"><strong>Before running:</strong> Review the PowerShell source and use a test computer you own or are authorized to support. Follow organizational execution-policy requirements.</p>
+        </article>
+
+        <article class="case-card case-card-wide" id="implementation">
+          <div class="case-index">03 / STEP-BY-STEP IMPLEMENTATION</div>
+          <h2>Run the toolkit and inspect both reports</h2>
+          <ol>
+            <li>Copy the project folder to a Windows 10/11 test computer and inspect <code>Windows-PC-Health-Check.ps1</code>.</li>
+            <li>Open PowerShell in the project folder and run the script for the current session only if permitted by the device's organizational policy.</li>
+            <li>The script creates a <code>Reports</code> folder beside the script by default and generates a timestamp for the output filenames.</li>
+            <li>Review the CSV rows and open the HTML report. Treat <code>CHECK</code> and <code>WARNING</code> as prompts to investigate, not proof of a fault.</li>
+            <li>Document any missing command output or unavailable system detail rather than assuming the check passed.</li>
+          </ol>
+          <div class="case-code">
+            <pre><code>powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File .\Windows-PC-Health-Check.ps1</code></pre>
+          </div>
+          <p class="case-copy-status">Use only when allowed by your organization's policy. Do not bypass execution policy.</p>
+        </article>
+
+        <article class="case-card case-card-wide" id="configuration">
+          <div class="case-index">04 / COMMANDS &amp; CONFIGURATION</div>
+          <h2>Checks and report outputs in the source</h2>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead><tr><th>Area</th><th>Script method</th><th>Recorded information</th></tr></thead>
+              <tbody>
+                <tr><td>System</td><td><code>Get-CimInstance Win32_OperatingSystem</code></td><td>Computer name, OS caption/version, last boot and calculated uptime.</td></tr>
+                <tr><td>Hardware</td><td><code>Get-CimInstance Win32_Processor</code> and OS memory properties</td><td>Processor name, logical processor count, installed and free memory.</td></tr>
+                <tr><td>Storage</td><td><code>Get-CimInstance Win32_LogicalDisk -Filter 'DriveType=3'</code></td><td>Fixed-drive free/total space and a warning status below 10% free.</td></tr>
+                <tr><td>Network</td><td><code>Get-NetIPConfiguration</code></td><td>Interface IPv4 addresses, default gateway and DNS server addresses.</td></tr>
+                <tr><td>Services</td><td><code>Get-Service</code></td><td>Status for configured services; running is marked OK, other states CHECK.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="case-subsection">
+            <h3>Output files</h3>
+            <p><code>Reports\Windows-Health-&lt;timestamp&gt;.csv</code> and <code>Reports\Windows-Health-&lt;timestamp&gt;.html</code>. The script also accepts an <code>OutputDirectory</code> parameter and a <code>ServicesToCheck</code> list.</p>
+          </div>
+          <div class="case-actions">
+            <a class="case-button" href="Windows-PC-Health-Check.ps1" download>DOWNLOAD POWERSHELL SOURCE</a>
+            <a class="case-button" href="README.md">READ PROJECT GUIDE</a>
+          </div>
+        </article>
+
+        <article class="case-card" id="troubleshooting">
+          <div class="case-index">05 / TROUBLESHOOTING</div>
+          <h2>Interpret the report carefully</h2>
+          <ul>
+            <li><strong>System query warning:</strong> review the message recorded by the script; CIM or a requested system property may be unavailable.</li>
+            <li><strong>Disk warning:</strong> the source marks a fixed volume below 10% free as WARNING. Confirm capacity and usage before deciding next steps.</li>
+            <li><strong>Service marked CHECK:</strong> confirm the service is installed and whether its current state is expected; a non-running service is not automatically a fault.</li>
+            <li><strong>Missing network data:</strong> review the adapter's connection state and available permissions, then compare with Windows network settings.</li>
+            <li><strong>Report not found:</strong> check the configured output folder and permissions; the default path is the script's <code>Reports</code> directory.</li>
+          </ul>
+        </article>
+
+        <article class="case-card">
+          <div class="case-index">06 / SCREENSHOTS &amp; EVIDENCE</div>
+          <h2>No captured evidence is included</h2>
+          <p>The supplied project files contain the script and run instructions, but no screenshots or generated reports. After an authorized test run, evidence could include the HTML report, selected CSV rows and a redacted PowerShell session view.</p>
+          <p class="case-callout"><strong>Protect data:</strong> Remove hostnames, user details, IP information or other sensitive values before sharing any real system report.</p>
+        </article>
+
+        <article class="case-card case-card-wide">
+          <div class="case-index">07 / RESULTS &amp; KEY LEARNINGS</div>
+          <h2>Structured outputs, not claimed test results</h2>
+          <p>The documented result of running the script is a timestamped CSV and HTML report. No report has been included here, so no measured health result or successful execution is claimed.</p>
+          <ul>
+            <li>Separate observed system values from status labels that need human interpretation.</li>
+            <li>Use repeatable, read-only checks to gather useful context before troubleshooting.</li>
+            <li>Review the output for missing data and protect endpoint information when sharing evidence.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <footer class="case-footer">
+      <span>WINDOWS DESKTOP SUPPORT / POWERSHELL</span>
+      <a href="../../../index.html#projects">← Back to portfolio projects</a>
+      <span>© <span id="case-year"></span> MUHAMMED SHAFI AM</span>
+    </footer>
+  </div>
+</body>
+</html>
